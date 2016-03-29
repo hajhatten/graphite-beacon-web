@@ -10,7 +10,7 @@
   </thead>
   <tbody>
     <tr data-ng-repeat="alert in alerts">
-      <td>{{ alert.name }}</td>
+      <td><a href="#/alert/{{ alert.ID }}">{{ alert.name }}</a></td>
       <td>{{ alert.source }}</td>
       <td>{{ alert.query }}</td>
       <td>{{ alert.interval }}</td>
