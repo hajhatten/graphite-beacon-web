@@ -12,14 +12,14 @@
     <th>Delete</th>
   </thead>
   <tbody>
-    <tr data-ng-repeat="conf in configurations" ng-click="show('/configuration/' + conf.ID)" class="pointer">
-      <td>{{ conf.name }}</td>
-      <td>{{ conf.graphite_url }}</td>
-      <td>{{ conf.public_graphite_url }}</td>
-      <td>{{ conf.auth_username }}</td>
-      <td>{{ conf.pidfile }}</td>
-      <td>{{ conf.logging }}</td>
-      <td>{{ conf.prefix }}</td>
+    <tr data-ng-repeat="conf in configurations">
+      <td ng-click="show('/configuration/' + conf.ID)" class="pointer">{{ conf.name }}</td>
+      <td ng-click="show('/configuration/' + conf.ID)" class="pointer">{{ conf.graphite_url }}</td>
+      <td ng-click="show('/configuration/' + conf.ID)" class="pointer">{{ conf.public_graphite_url }}</td>
+      <td ng-click="show('/configuration/' + conf.ID)" class="pointer">{{ conf.auth_username }}</td>
+      <td ng-click="show('/configuration/' + conf.ID)" class="pointer">{{ conf.pidfile }}</td>
+      <td ng-click="show('/configuration/' + conf.ID)" class="pointer">{{ conf.logging }}</td>
+      <td ng-click="show('/configuration/' + conf.ID)" class="pointer">{{ conf.prefix }}</td>
       <td ng-click="delete('/api/configuration/' + conf.ID)" class="pointer"><span class="glyphicon glyphicon-remove"></span></td>
     </tr>
   </tbody>

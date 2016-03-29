@@ -28,6 +28,25 @@ func GetConfigurations() echo.HandlerFunc {
   }
 }
 
+// GetDeletedConfigurations Returns all the saved alerts
+func GetDeletedConfigurations() echo.HandlerFunc {
+  return func(c echo.Context) error {
+    db := db.OpenDBConnection()
+    var configurations []types.Configuration
+
+    if db.HasTable("configurations") == false {  
+      log.Println("table configurations not found, creating it")
+      db.CreateTable(&configurations)
+    }
+    
+    log.Println("fetching configurations from db")
+    db.Unscoped().Find(&configurations)
+    
+    defer db.Close()
+    return c.JSON(http.StatusOK, configurations)
+  }
+}
+
 // GetConfiguration Returns the configuration by id
 func GetConfiguration() echo.HandlerFunc {
   return func(c echo.Context) error {
@@ -125,6 +144,36 @@ func DeleteConfiguration() echo.HandlerFunc {
     db.Delete(&configuration, c.Param("id"))
     
     defer db.Close()
-    return c.HTML(http.StatusOK, "configuration deleted.")
+    return c.NoContent(204)
+  }
+}
+
+// UndeleteConfiguration undeletes an alert
+func UndeleteConfiguration() echo.HandlerFunc {
+  return func(c echo.Context) error {
+    db := db.OpenDBConnection()
+    var configuration types.Configuration
+    
+    configuration.DeletedAt = nil
+    
+    defer db.Close()
+    return c.NoContent(204)
+  }
+}
+
+// PermDeleteConfiguration Deletes the alert by id
+func PermDeleteConfiguration() echo.HandlerFunc {
+  return func(c echo.Context) error {
+    db := db.OpenDBConnection()
+    var configuration types.Configuration
+    
+    log.Println("fetching configuration from db")
+    db.First(&configuration, c.Param("id"))
+    
+    log.Println("permanently deleting configuration from db")
+    db.Unscoped().Delete(&configuration)
+    
+    defer db.Close()
+    return c.NoContent(204)
   }
 }

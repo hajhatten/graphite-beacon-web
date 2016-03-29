@@ -28,6 +28,25 @@ func GetAlerts() echo.HandlerFunc {
   }
 }
 
+// GetDeletedAlerts Returns all the saved alerts
+func GetDeletedAlerts() echo.HandlerFunc {
+  return func(c echo.Context) error {
+    db := db.OpenDBConnection()
+    var alerts []types.Alert
+
+    if db.HasTable("alerts") == false {  
+      log.Println("table alerts not found, creating it")
+      db.CreateTable(&alerts)
+    }
+    
+    log.Println("fetching alerts from db")
+    db.Unscoped().Find(&alerts)
+    
+    defer db.Close()
+    return c.JSON(http.StatusOK, alerts)
+  }
+}
+
 // GetAlert Returns the alert by id
 func GetAlert() echo.HandlerFunc {
   return func(c echo.Context) error {
@@ -73,7 +92,6 @@ func UpdateAlert() echo.HandlerFunc {
     var alert types.Alert
     
     log.Println("fetching alert from db")
-    db.First(&alert, c.Param("id"))
     
     log.Println("updating alert object from form")
     alert.Name = c.FormValue("name")
@@ -104,6 +122,36 @@ func DeleteAlert() echo.HandlerFunc {
     
     log.Println("deleting alert from db")
     db.Delete(&alert)
+    
+    defer db.Close()
+    return c.NoContent(204)
+  }
+}
+
+// UndeleteAlert undeletes an alert
+func UndeleteAlert() echo.HandlerFunc {
+  return func(c echo.Context) error {
+    db := db.OpenDBConnection()
+    var alert types.Alert
+    
+    alert.DeletedAt = nil
+    
+    defer db.Close()
+    return c.NoContent(204)
+  }
+}
+
+// PermDeleteAlert Deletes the alert by id
+func PermDeleteAlert() echo.HandlerFunc {
+  return func(c echo.Context) error {
+    db := db.OpenDBConnection()
+    var alert types.Alert
+    
+    log.Println("fetching alert from db")
+    db.First(&alert, c.Param("id"))
+    
+    log.Println("deleting alert from db")
+    db.Unscoped().Delete(&alert)
     
     defer db.Close()
     return c.NoContent(204)

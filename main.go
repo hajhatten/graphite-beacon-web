@@ -31,10 +31,14 @@ func main() {
   alertsAPI.Get("/", api.GetAlerts())
   alertsAPI.Get("s/", api.GetAlerts())
   
+  alertsAPI.Get("s/deleted", api.GetDeletedAlerts())
+  
   alertsAPI.Get("/:id", api.GetAlert())
   alertsAPI.Post("/:id", api.NewAlert())
   alertsAPI.Patch("/:id", api.UpdateAlert())
   alertsAPI.Delete("/:id", api.DeleteAlert())
+  alertsAPI.Patch("/:id/undelete", api.UndeleteAlert())
+  alertsAPI.Delete("/:id/permdelete", api.PermDeleteAlert())
   
   alertsAPI.Use(cors)
   
@@ -49,6 +53,8 @@ func main() {
   configurationssAPI.Post("/:id", api.NewConfiguration())
   configurationssAPI.Patch("/:id", api.UpdateConfiguration())
   configurationssAPI.Delete("/:id", api.DeleteConfiguration())
+  configurationssAPI.Patch("/:id/undelete", api.UndeleteConfiguration())
+  configurationssAPI.Delete("/:id/permdelete", api.PermDeleteConfiguration())
   
   configurationssAPI.Use(cors)
   

@@ -10,12 +10,12 @@
     <th>Delete</th>
   </thead>
   <tbody>
-    <tr data-ng-repeat="alert in alerts" ng-click="go('/alert/' + alert.ID)" class="pointer">
-      <td>{{ alert.name }}</td>
-      <td>{{ alert.source }}</td>
-      <td>{{ alert.query }}</td>
-      <td>{{ alert.interval }}</td>
-      <td>{{ alert.method }}</td>
+    <tr data-ng-repeat="alert in alerts">
+      <td ng-click="go('/alert/' + alert.ID)" class="pointer">{{ alert.name }}</td>
+      <td ng-click="go('/alert/' + alert.ID)" class="pointer">{{ alert.source }}</td>
+      <td ng-click="go('/alert/' + alert.ID)" class="pointer">{{ alert.query }}</td>
+      <td ng-click="go('/alert/' + alert.ID)" class="pointer">{{ alert.interval }}</td>
+      <td ng-click="go('/alert/' + alert.ID)" class="pointer">{{ alert.method }}</td>
       <td ng-click="delete('/api/alert/' + alert.ID)" class="pointer"><span class="glyphicon glyphicon-remove"></span></td>
     </tr>
   </tbody>

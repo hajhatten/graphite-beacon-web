@@ -12,7 +12,25 @@ graphiteBeaconWebControllers.controller('AlertListCtrl', ['$scope', '$http', '$l
         $http.delete(url).success(function(data) {
           console.log(data);
           $http.get('api/alerts').success(function(data) {
-            $scope.configurations = data;
+            $scope.alerts = data;
+          });
+        });
+    }
+  }]);
+
+graphiteBeaconWebControllers.controller('AlertDeletedListCtrl', ['$scope', '$http', '$location',
+  function ($scope, $http, $location) {
+    $http.get('api/alerts/deleted').success(function(data) {
+      $scope.alerts = data;
+    });
+    $scope.go = function (url) {
+        $location.path(url);
+    }
+    $scope.undelete = function (url) {
+        $http.patch(url).success(function(data) {
+          console.log(data);
+          $http.get('api/alerts/deleted').success(function(data) {
+            $scope.alerts = data;
           });
         });
     }
