@@ -16,6 +16,7 @@ func main() {
   cors := standard.WrapMiddleware(cors.New(cors.Options{
 		AllowedOrigins: []string{"*"},
 	}).Handler)
+  e.Use(cors)
   
   
   // Static files
@@ -37,7 +38,7 @@ func main() {
   alertsAPI.Post("/:id", api.NewAlert())
   alertsAPI.Patch("/:id", api.UpdateAlert())
   alertsAPI.Delete("/:id", api.DeleteAlert())
-  alertsAPI.Patch("/:id/undelete", api.UndeleteAlert())
+  alertsAPI.Put("/:id/undelete", api.UndeleteAlert())
   alertsAPI.Delete("/:id/permdelete", api.PermDeleteAlert())
   
   alertsAPI.Use(cors)
@@ -51,7 +52,7 @@ func main() {
   
   configurationssAPI.Get("/:id", api.GetConfiguration())
   configurationssAPI.Post("/:id", api.NewConfiguration())
-  configurationssAPI.Patch("/:id", api.UpdateConfiguration())
+  configurationssAPI.Put("/:id", api.UpdateConfiguration())
   configurationssAPI.Delete("/:id", api.DeleteConfiguration())
   configurationssAPI.Patch("/:id/undelete", api.UndeleteConfiguration())
   configurationssAPI.Delete("/:id/permdelete", api.PermDeleteConfiguration())

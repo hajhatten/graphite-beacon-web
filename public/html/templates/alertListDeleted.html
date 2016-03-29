@@ -1,4 +1,4 @@
-<h3>Alerts</h3>
+<h3>Deleted Alerts</h3>
 
 <div>
   <form class="row">
@@ -12,7 +12,7 @@
       </select>
     </div>
     <div class="form-group col-xs-2">
-      <a href="#/alerts/deleted" class="btn btn-warning">View deleted</a>
+      <a href="#/alerts" class="btn btn-success">Back to regular view</a>
     </div>
   </form>
 </div>
@@ -21,19 +21,21 @@
   <thead>
     <th>Name</th>
     <th>Source</th>
-    <th>Query</th>
+    <th>Format</th>
     <th>Interval</th>
     <th>Method</th>
+    <th>Deleted At</th>
     <th>Delete</th>
   </thead>
   <tbody>
     <tr data-ng-repeat="alert in alerts | filter: searchFilter | filter: sourceFilter">
-      <td ng-click="go('/alert/' + alert.ID)" class="pointer">{{ alert.name }}</td>
-      <td ng-click="go('/alert/' + alert.ID)" class="pointer">{{ alert.source }}</td>
-      <td ng-click="go('/alert/' + alert.ID)" class="pointer">{{ alert.query }}</td>
-      <td ng-click="go('/alert/' + alert.ID)" class="pointer">{{ alert.interval }}</td>
-      <td ng-click="go('/alert/' + alert.ID)" class="pointer">{{ alert.method }}</td>
-      <td ng-click="delete('/api/alert/' + alert.ID)" class="pointer"><span class="glyphicon glyphicon-remove"></span></td>
+      <td>{{ alert.name }}</td>
+      <td>{{ alert.source }}</td>
+      <td>{{ alert.query }}</td>
+      <td>{{ alert.interval }}</td>
+      <td>{{ alert.method }}</td>
+      <td>{{ alert.DeletedAt }}</td>
+      <td ng-click="undelete('/api/alert/' + alert.ID + '/undelete')" class="pointer"><span class="fa fa-undo"></span></td>
     </tr>
   </tbody>
 </table>

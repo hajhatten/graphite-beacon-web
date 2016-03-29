@@ -27,8 +27,7 @@ graphiteBeaconWebControllers.controller('AlertDeletedListCtrl', ['$scope', '$htt
         $location.path(url);
     }
     $scope.undelete = function (url) {
-        $http.patch(url).success(function(data) {
-          console.log(data);
+        $http.put(url).success(function(data) {
           $http.get('api/alerts/deleted').success(function(data) {
             $scope.alerts = data;
           });
@@ -58,6 +57,23 @@ graphiteBeaconWebControllers.controller('ConfigurationListCtrl', ['$scope', '$ht
         $http.delete(url).success(function(data) {
           console.log(data);
           $http.get('api/configurations').success(function(data) {
+            $scope.configurations = data;
+          });
+        });
+    }
+  }]);
+  
+graphiteBeaconWebControllers.controller('ConfigurationDeletedListCtrl', ['$scope', '$http', '$location',
+  function ($scope, $http, $location) {
+    $http.get('api/configurations/deleted').success(function(data) {
+      $scope.configurations = data;
+    });
+    $scope.go = function (url) {
+        $location.path(url);
+    }
+    $scope.undelete = function (url) {
+        $http.put(url).success(function(data) {
+          $http.get('api/configurations/deleted').success(function(data) {
             $scope.configurations = data;
           });
         });

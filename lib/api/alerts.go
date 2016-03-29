@@ -40,7 +40,7 @@ func GetDeletedAlerts() echo.HandlerFunc {
     }
     
     log.Println("fetching alerts from db")
-    db.Unscoped().Find(&alerts)
+    db.Unscoped().Where("deleted_at IS NOT ?", nil).Find(&alerts)
     
     defer db.Close()
     return c.JSON(http.StatusOK, alerts)
@@ -134,7 +134,8 @@ func UndeleteAlert() echo.HandlerFunc {
     db := db.OpenDBConnection()
     var alert types.Alert
     
-    alert.DeletedAt = nil
+    log.Println("setting alert deleted_at to nil in db")
+    db.Unscoped().First(&alert, c.Param("id")).Update("deleted_at", nil)
     
     defer db.Close()
     return c.NoContent(204)
