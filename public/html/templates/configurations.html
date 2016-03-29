@@ -1,0 +1,24 @@
+<h3>Configurations</h3>
+
+<table class="table table-responsive table-striped table-hover table-condensed">
+  <thead>
+    <th>Name</th>
+    <th>Graphite URL</th>
+    <th>Public URL</th>
+    <th>Username</th>
+    <th>Pidfile</th>
+    <th>Logging</th>
+    <th>Prefix</th>
+  </thead>
+  <tbody>
+    <tr data-ng-repeat="conf in configurations">
+      <td>{{ conf.name }}</td>
+      <td>{{ conf.graphite_url }}</td>
+      <td>{{ conf.public_graphite_url }}</td>
+      <td>{{ conf.auth_username }}</td>
+      <td>{{ conf.pidfile }}</td>
+      <td>{{ conf.logging }}</td>
+      <td>{{ conf.prefix }}</td>
+    </tr>
+  </tbody>
+</table>
