@@ -9,9 +9,10 @@
     <th>Pidfile</th>
     <th>Logging</th>
     <th>Prefix</th>
+    <th>Delete</th>
   </thead>
   <tbody>
-    <tr data-ng-repeat="conf in configurations" ng-click="go('/configuration/' + conf.ID)" class="pointer">
+    <tr data-ng-repeat="conf in configurations" ng-click="show('/configuration/' + conf.ID)" class="pointer">
       <td>{{ conf.name }}</td>
       <td>{{ conf.graphite_url }}</td>
       <td>{{ conf.public_graphite_url }}</td>
@@ -19,6 +20,7 @@
       <td>{{ conf.pidfile }}</td>
       <td>{{ conf.logging }}</td>
       <td>{{ conf.prefix }}</td>
+      <td ng-click="delete('/api/configuration/' + conf.ID)" class="pointer"><span class="glyphicon glyphicon-remove"></span></td>
     </tr>
   </tbody>
 </table>

@@ -15,6 +15,11 @@ func GetConfigurations() echo.HandlerFunc {
     db := db.OpenDBConnection()
     var configurations []types.Configuration
     
+    if db.HasTable("configurations") == false {  
+      log.Println("table alerts not found, creating it")
+      db.CreateTable(&configurations)
+    }
+    
     log.Println("fetching configurations from db")
     db.Find(&configurations)
     
@@ -116,13 +121,10 @@ func DeleteConfiguration() echo.HandlerFunc {
     db := db.OpenDBConnection()
     var configuration types.Configuration
     
-    log.Println("fetching configuration from db")
-    db.First(&configuration, c.Param("id"))
-    
     log.Println("deleting configuration from db")
-    db.Delete(&configuration)
+    db.Delete(&configuration, c.Param("id"))
     
     defer db.Close()
-    return c.Render(http.StatusOK, "message", "configuration '" + configuration.Name + "' deleted.")
+    return c.HTML(http.StatusOK, "configuration deleted.")
   }
 }

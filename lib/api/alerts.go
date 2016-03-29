@@ -15,6 +15,11 @@ func GetAlerts() echo.HandlerFunc {
     db := db.OpenDBConnection()
     var alerts []types.Alert
 
+    if db.HasTable("alerts") == false {  
+      log.Println("table alerts not found, creating it")
+      db.CreateTable(&alerts)
+    }
+    
     log.Println("fetching alerts from db")
     db.Find(&alerts)
     
@@ -101,6 +106,6 @@ func DeleteAlert() echo.HandlerFunc {
     db.Delete(&alert)
     
     defer db.Close()
-    return c.Render(http.StatusOK, "message", "alert '" + alert.Name + "' deleted.")
+    return c.NoContent(204)
   }
 }

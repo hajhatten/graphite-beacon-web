@@ -7,6 +7,7 @@
     <th>Format</th>
     <th>Interval</th>
     <th>Method</th>
+    <th>Delete</th>
   </thead>
   <tbody>
     <tr data-ng-repeat="alert in alerts" ng-click="go('/alert/' + alert.ID)" class="pointer">
@@ -15,6 +16,7 @@
       <td>{{ alert.query }}</td>
       <td>{{ alert.interval }}</td>
       <td>{{ alert.method }}</td>
+      <td ng-click="delete('/api/alert/' + alert.ID)" class="pointer"><span class="glyphicon glyphicon-remove"></span></td>
     </tr>
   </tbody>
 </table>

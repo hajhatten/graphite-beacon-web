@@ -8,6 +8,14 @@ graphiteBeaconWebControllers.controller('AlertListCtrl', ['$scope', '$http', '$l
     $scope.go = function (url) {
         $location.path(url);
     }
+    $scope.delete = function (url) {
+        $http.delete(url).success(function(data) {
+          console.log(data);
+          $http.get('api/alerts').success(function(data) {
+            $scope.configurations = data;
+          });
+        });
+    }
   }]);
 
 graphiteBeaconWebControllers.controller('AlertDetailCtrl', ['$scope', '$http', '$location', '$routeParams',
@@ -28,14 +36,19 @@ graphiteBeaconWebControllers.controller('ConfigurationListCtrl', ['$scope', '$ht
     $scope.go = function (url) {
         $location.path(url);
     }
+    $scope.delete = function (url) {
+        $http.delete(url).success(function(data) {
+          console.log(data);
+          $http.get('api/configurations').success(function(data) {
+            $scope.configurations = data;
+          });
+        });
+    }
   }]);
   
 graphiteBeaconWebControllers.controller('ConfigurationDetailCtrl', ['$scope', '$http', '$location', '$routeParams',
   function ($scope, $http, $location, $routeParams) {
     $http.get('api/configuration/' + $routeParams.id).success(function(data) {
       $scope.conf = data;
-    });
-    $scope.go = function (url) {
-        $location.path(url);
-    }
+    });    
   }]);
