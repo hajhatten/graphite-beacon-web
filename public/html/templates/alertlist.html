@@ -9,8 +9,8 @@
     <th>Method</th>
   </thead>
   <tbody>
-    <tr data-ng-repeat="alert in alerts">
-      <td><a href="#/alert/{{ alert.ID }}">{{ alert.name }}</a></td>
+    <tr data-ng-repeat="alert in alerts" ng-click="go('/alert/' + alert.ID)" class="pointer">
+      <td>{{ alert.name }}</td>
       <td>{{ alert.source }}</td>
       <td>{{ alert.query }}</td>
       <td>{{ alert.interval }}</td>

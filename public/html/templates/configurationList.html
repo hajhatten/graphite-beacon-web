@@ -11,7 +11,7 @@
     <th>Prefix</th>
   </thead>
   <tbody>
-    <tr data-ng-repeat="conf in configurations">
+    <tr data-ng-repeat="conf in configurations" ng-click="go('/configuration/' + conf.ID)" class="pointer">
       <td>{{ conf.name }}</td>
       <td>{{ conf.graphite_url }}</td>
       <td>{{ conf.public_graphite_url }}</td>
