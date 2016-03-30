@@ -28,11 +28,11 @@
   </thead>
   <tbody>
     <tr data-ng-repeat="alert in alerts | filter: searchFilter | filter: sourceFilter">
-      <td ng-click="go('/alert/' + alert.ID)" class="pointer">{{ alert.name }}</td>
-      <td ng-click="go('/alert/' + alert.ID)" class="pointer">{{ alert.source }}</td>
-      <td ng-click="go('/alert/' + alert.ID)" class="pointer">{{ alert.query }}</td>
-      <td ng-click="go('/alert/' + alert.ID)" class="pointer">{{ alert.interval }}</td>
-      <td ng-click="go('/alert/' + alert.ID)" class="pointer">{{ alert.method }}</td>
+      <td ng-click="details('/alert/' + alert.ID)" class="pointer">{{ alert.name }}</td>
+      <td ng-click="details('/alert/' + alert.ID)" class="pointer">{{ alert.source }}</td>
+      <td ng-click="details('/alert/' + alert.ID)" class="pointer">{{ alert.query }}</td>
+      <td ng-click="details('/alert/' + alert.ID)" class="pointer">{{ alert.interval }}</td>
+      <td ng-click="details('/alert/' + alert.ID)" class="pointer">{{ alert.method }}</td>
       <td ng-click="delete('/api/alert/' + alert.ID)" class="pointer"><span class="glyphicon glyphicon-remove"></span></td>
     </tr>
   </tbody>

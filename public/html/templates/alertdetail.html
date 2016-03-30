@@ -1,10 +1,51 @@
-<h3>{{ alert.name }}</h3>
-
-{{ alert.name }}
-{{ alert.query }}
-{{ alert.source }}
-{{ alert.format }}
-{{ alert.method }}
-{{ alert.interval }}
-{{ alert.no_data }}
-{{ alert.until }}
+<h3>Edit Alert</h3>
+<div class="row">
+  <form class="col-xs-6">
+  
+    <div class="form-group">
+      <label for="name">Alert name</label>
+      <input type="text" id="name" name="name" value="{{ alert.name }}" class="form-control"/> 
+    </div>
+    <div class="form-group">
+      <label for="query">Query</label>
+      <input type="text" id="query" name="query" value="{{ alert.query }}" class="form-control"/> 
+    </div>
+    <div class="form-group">
+      <label for="source">Source</label>
+      <input type="text" id="source" name="source" value="{{ alert.source }}" class="form-control"/> 
+    </div>
+    <div class="form-group">
+      <label for="format">Format</label>
+      <input type="text" id="format" name="format" value="{{ alert.format }}" class="form-control"/> 
+    </div>
+    <div class="form-group">
+      <label for="method">Method</label>
+      <input type="text" id="method" name="method" value="{{ alert.method }}" class="form-control"/> 
+    </div>
+    <div class="form-group">
+      <label for="interval">Interval</label>
+      <input type="text" id="interval" name="interval" value="{{ alert.interval }}" class="form-control"/> 
+    </div>
+    <div class="form-group">
+      <label for="no_data">No Data</label>
+      <input type="text" id="no_data" name="no_data" value="{{ alert.no_data }}" class="form-control"/> 
+    </div>
+    <div class="form-group">
+      <label for="until">Until</label>
+      <input type="text" id="until" name="until" value="{{ alert.until }}" class="form-control"/> 
+    </div>
+    
+    <div class="row">
+      <div class="form-group col-xs-4">
+        <a ng-click="goBack()" class="form-control btn btn-default">Back to list</a>
+      </div>
+      <div class="form-group col-xs-4">
+        <input type="button" class="form-control btn btn-primary" value="Update alert"/>
+      </div>
+      <div class="form-group col-xs-4">
+        <a ng-click="permDelete('{{ alert.ID }}')" class="form-control btn btn-danger">Delete alert</a>
+      </div>
+    </div>
+    
+  </form>
+</div>
