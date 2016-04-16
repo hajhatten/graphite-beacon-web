@@ -2,38 +2,38 @@ var graphiteBeaconWebroutes = angular.module('graphiteBeaconWebRoutes', ['ngRout
 
 graphiteBeaconWebroutes.config(['$routeProvider', function($routeProvider) {
     $routeProvider
-    
+
       // alert routes
       .when('/alerts', {
-        templateUrl: '/html/templates/alertList.html',
+        templateUrl: '/html/templates/alertsList.html',
         controller: 'AlertListCtrl'
       })
       .when('/alerts/deleted', {
-        templateUrl: '/html/templates/alertListDeleted.html',
+        templateUrl: '/html/templates/alertsListDeleted.html',
         controller: 'AlertDeletedListCtrl'
       })
       .when('/alert/:id', {
         templateUrl: '/html/templates/alertDetail.html',
         controller: 'AlertDetailCtrl'
       })
-      
+
       // configuration routes
       .when('/configurations', {
-        templateUrl: '/html/templates/configurationList.html',
+        templateUrl: '/html/templates/configurationsList.html',
         controller: 'ConfigurationListCtrl'
       })
       .when('/configurations/deleted', {
-        templateUrl: '/html/templates/configurationListDeleted.html',
+        templateUrl: '/html/templates/configurationsListDeleted.html',
         controller: 'ConfigurationDeletedListCtrl'
       })
       .when('/configuration/:id', {
         templateUrl: '/html/templates/configurationDetail.html',
         controller: 'ConfigurationDetailCtrl'
       })
-      
+
       // catch all route
       .otherwise({
         redirectTo: '/alerts'
       });
-      
+
   }]);
